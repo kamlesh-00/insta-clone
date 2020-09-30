@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken')
-const { JWT_SECRET } = require('../keys')
 const  mongoose = require('mongoose')
 const User = mongoose.model("User")
 
@@ -10,7 +9,7 @@ module.exports = (req,res,next)=>{
     }
     console.log(authorization)
     const token = authorization.replace("Bearer ","")
-    jwt.verify(token,JWT_SECRET,(err,playload)=>{
+    jwt.verify(token,process.env.JWT_SECRET,(err,playload)=>{
         if(err) return res.status(401).json({error:"you are must be logged in."})
         const { _id } = playload
         User.findById(_id)

@@ -4,7 +4,6 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 
 //ALL_EXPORTS
-const { MONGOURI } = require('./keys')
 
 //
 const app = express()
@@ -23,7 +22,7 @@ app.use(require('./routes/posts'))
 const PORT = 8888
 
 //CONNECTIONS
-mongoose.connect(MONGOURI,{ 
+mongoose.connect(process.env.MONGOURI,{ 
     useNewUrlParser:true,
     useUnifiedTopology: true,
  })
